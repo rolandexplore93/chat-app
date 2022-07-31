@@ -18,9 +18,14 @@ let greeting = {
 
 io.on('connection', (socket) => {
 
-    socket.emit('message', greeting)
+    socket.emit('message', greeting);
+    socket.broadcast.emit('message', 'A new user joined')
     socket.on('sendMessage', (message) => {
-        io.emit('message', message)
+        io.emit('message', message);
+    })
+
+    socket.on('disconnect', () => {
+        io.emit('message', 'A user has left');
     })
 
 })
