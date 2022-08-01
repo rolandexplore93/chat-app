@@ -6,9 +6,10 @@ socket.on('message', (message) => {
 
 document.querySelector('#submission').addEventListener('submit', (e) => {
     e.preventDefault()
-    // const message = document.querySelector('input').value;
     const message = e.target.elements.message.value
-    socket.emit('sendMessage', message)
+    socket.emit('sendMessage', message, (serverResponse) => {
+        if (serverResponse) return console.log(serverResponse)
+    })
 })
 
 document.querySelector('#my-location').addEventListener('click', (e) => {
@@ -23,6 +24,8 @@ document.querySelector('#my-location').addEventListener('click', (e) => {
             longitude: position.coords.longitude
         };
 
-        socket.emit('sendLocation', sendLocation)
+        socket.emit('sendLocation', sendLocation, (serverResponse) => {
+            console.log(serverResponse)
+        })
     })
 })
