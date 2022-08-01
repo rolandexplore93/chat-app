@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Chat App</h1>
+    <div id="messages"></div>
     <form action="" id="submission">
-        <input type="text" placeholder="input message" name="message">
-        <button>Send message</button>
-        <button id="my-location">Get my location</button>
+      <input type="text" placeholder="input message" name="message" />
+      <button>Send message</button>
+      <button id="my-location">Get my location</button>
     </form>
 
+    <script id="message-template" type="text/html">
+      <div>
+        <p>{{message}}</p>
+      </div>
+    </script>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.0/qs.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/chat.js"></script>
-</body>
+  </body>
 </html>
