@@ -2,7 +2,9 @@ const path = require('path');
 const http =  require('http');
 const express = require('express');
 const socketio = require('socket.io');
-const Filter = require('bad-words')
+const Filter = require('bad-words');
+const generateMessages = require('./utils/messages');
+
 
 const app = express();
 const server = http.createServer(app);
@@ -16,14 +18,14 @@ let greeting = "Dear Anonymous! \nWelcome to our team";
 
 io.on('connection', (socket) => {
 
-    socket.emit('message', greeting);
-    socket.broadcast.emit('message', 'A new user joined')
+    socket.emit('message', generateMessages(greeting));
+    socket.broadcast.emit('message', generateMessages('A new user joined'))
     socket.on('sendMessage', (message, callback) => {
         const filter = new Filter();
 
         if (filter.isProfane(message)) return callback('Profane words not allowed!')
 
-        io.emit('message', message);
+        io.emit('message', generateMessages(message));
         callback()
     })
 
@@ -35,39 +37,9 @@ io.on('connection', (socket) => {
     })
 
     socket.on('disconnect', () => {
-        io.emit('message', 'A user has left');
+        io.emit('message', generateMessages('A user has left'));
     })
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// io.on('connection', (socket) => {
-//     console.log("New Web Socket connection")
-//     // socket.emit('countUpdated', count)
-
-//     // socket.on('increment', () => {
-//     //     count++
-//     //     console.log(count)
-
-//     //     io.emit('countUpdated', count) // io.emit emits to all connections
-//     // })
-// })
 
 server.listen(port, (req, res) => {
     console.log(`Listening to the server at port ${port}`)
