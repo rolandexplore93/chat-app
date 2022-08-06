@@ -12,12 +12,7 @@ const publicDirectoryPath = path.join(__dirname, "../public");
 const port = process.env.PORT || 3000
 app.use(express.static(publicDirectoryPath));
 
-let greeting = {
-    message: "Welcome Anonymous!",
-    no: 250
-}
-
-// console.log(new Filter())
+let greeting = "Dear Anonymous! \nWelcome to our team";
 
 io.on('connection', (socket) => {
 
@@ -34,7 +29,7 @@ io.on('connection', (socket) => {
 
     // listen to sendLocation event on the server
     socket.on('sendLocation', (sendLocation, callback) => {
-        io.emit('message', `My location: https://google.com/maps?q=${sendLocation.latitude},${sendLocation.longitude} `);
+        io.emit('locationMessage', `My location: https://google.com/maps?q=${sendLocation.latitude},${sendLocation.longitude} `);
 
         callback('Location shared!')
     })

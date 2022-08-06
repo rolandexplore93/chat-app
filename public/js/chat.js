@@ -4,24 +4,32 @@ const $messageFormInput = $messageForm.querySelector("input");
 const $messageFormButton = $messageForm.querySelector("button");
 const $sendLocationButton = document.querySelector("#my-location");
 const $messages = document.querySelector("#messages");
+const $locationUrl = document.querySelector('#location-url');
 
 // Templates
 const messageTemplate = document.querySelector("#message-template").innerHTML;
-console.log(messageTemplate);
+const locationTemplate = document.querySelector('#location-template').innerHTML;
 
 socket.on("message", (message) => {
   console.log(message);
   const html = Mustache.render(messageTemplate, {
-    message: message.message,
+    message
   });
-  $messages.insertAdjacentHTML("beforebegin", html);
+  $messages.insertAdjacentHTML('beforebegin', html)
 });
+
+socket.on('locationMessage', (mapUrl) => {
+  console.log(mapUrl);
+  const getUrl = mapUrl.split(' ')[2];
+  const html = Mustache.render(locationTemplate, {
+    url: getUrl
+  })
+  $locationUrl.insertAdjacentHTML('beforeend', html)
+})
 
 $messageForm.addEventListener("submit", (e) => {
   e.preventDefault();
-
   $messageFormButton.setAttribute("disabled", "disabled");
-
   const message = e.target.elements.message.value;
   socket.emit("sendMessage", message, (serverResponse) => {
     $messageFormButton.removeAttribute("disabled");
@@ -47,6 +55,10 @@ $sendLocationButton.addEventListener("click", (e) => {
 
     socket.emit("sendLocation", sendLocation, (serverResponse) => {
       console.log(serverResponse);
+      // const locationHtml = Mustache.render(locationTemplate, {
+      //   location: sendLocation
+      // });
+      // $messages.insertAdjacentHTML("beforeend", locationHtml);
       $sendLocationButton.removeAttribute("disabled");
     });
   });

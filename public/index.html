@@ -9,6 +9,7 @@
   <body>
     <h1>Chat App</h1>
     <div id="messages"></div>
+    <div id="location-url"></div>
     <form action="" id="submission">
       <input type="text" placeholder="input message" name="message" />
       <button>Send message</button>
@@ -18,6 +19,11 @@
     <script id="message-template" type="text/html">
       <div>
         <p>{{message}}</p>
+      </div>
+    </script>
+    <script id="location-template" type="text/html">
+      <div>
+        <p>Map URL: <a href='{{url}}' target="_blank">My current location</a></p>
       </div>
     </script>
 
