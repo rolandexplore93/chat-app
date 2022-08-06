@@ -1,8 +1,18 @@
 const generateMessages = (text) => {
     return {
-        text: text,
+        text,
         createdAt: new Date().getTime()
     }
 }
 
-module.exports = generateMessages
+const geoLocationMessage = (url) => {
+    return {
+        url,
+        createdAt: new Date().getTime()
+    }
+}
+
+module.exports = {
+    generateMessages,
+    geoLocationMessage
+}

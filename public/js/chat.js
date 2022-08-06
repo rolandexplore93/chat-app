@@ -21,9 +21,10 @@ socket.on("message", (message) => {
 
 socket.on('locationMessage', (mapUrl) => {
   console.log(mapUrl);
-  const getUrl = mapUrl.split(' ')[2];
+  const getUrl = mapUrl.url.split(' ')[2];
   const html = Mustache.render(locationTemplate, {
-    url: getUrl
+    url: getUrl,
+    createdAt: moment(mapUrl.createdAt).format("HH:mm a")
   })
   $locationUrl.insertAdjacentHTML('beforeend', html)
 })

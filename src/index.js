@@ -3,7 +3,8 @@ const http =  require('http');
 const express = require('express');
 const socketio = require('socket.io');
 const Filter = require('bad-words');
-const generateMessages = require('./utils/messages');
+const { generateMessages, geoLocationMessage } = require('./utils/messages');
+
 
 
 const app = express();
@@ -31,7 +32,8 @@ io.on('connection', (socket) => {
 
     // listen to sendLocation event on the server
     socket.on('sendLocation', (sendLocation, callback) => {
-        io.emit('locationMessage', `My location: https://google.com/maps?q=${sendLocation.latitude},${sendLocation.longitude} `);
+        const locationUrl = `My location: https://google.com/maps?q=${sendLocation.latitude},${sendLocation.longitude}`
+        io.emit('locationMessage', geoLocationMessage(locationUrl));
 
         callback('Location shared!')
     })
