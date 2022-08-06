@@ -4,7 +4,6 @@ const $messageFormInput = $messageForm.querySelector("input");
 const $messageFormButton = $messageForm.querySelector("button");
 const $sendLocationButton = document.querySelector("#my-location");
 const $messages = document.querySelector("#messages");
-const $locationUrl = document.querySelector('#location-url');
 
 // Templates
 const messageTemplate = document.querySelector("#message-template").innerHTML;
@@ -16,7 +15,7 @@ socket.on("message", (message) => {
     message: message.text,
     createdAt: moment(message.createdAt).format("HH:mm a")
   });
-  $messages.insertAdjacentHTML('beforebegin', html)
+  $messages.insertAdjacentHTML('beforeend', html)
 });
 
 socket.on('locationMessage', (mapUrl) => {
@@ -26,7 +25,7 @@ socket.on('locationMessage', (mapUrl) => {
     url: getUrl,
     createdAt: moment(mapUrl.createdAt).format("HH:mm a")
   })
-  $locationUrl.insertAdjacentHTML('beforeend', html)
+  $messages.insertAdjacentHTML('beforeend', html)
 })
 
 $messageForm.addEventListener("submit", (e) => {
