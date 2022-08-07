@@ -19,14 +19,20 @@ let greeting = "Dear Anonymous! \nWelcome to our team";
 
 io.on('connection', (socket) => {
 
-    socket.emit('message', generateMessages(greeting));
-    socket.broadcast.emit('message', generateMessages('A new user joined'))
+    // socket.emit('message', generateMessages(greeting));
+    // socket.broadcast.emit('message', generateMessages('A new user joined'))
+    socket.on('room', ({ username, room}) => {
+        socket.join(room);
+        socket.emit('message', generateMessages(greeting));
+        socket.broadcast.to(room).emit('message', generateMessages(`${username} joined ${room} group`))
+    })
+
     socket.on('sendMessage', (message, callback) => {
         const filter = new Filter();
 
         if (filter.isProfane(message)) return callback('Profane words not allowed!')
 
-        io.emit('message', generateMessages(message));
+        io.to('Barcelona').emit('message', generateMessages(message));
         callback()
     })
 
