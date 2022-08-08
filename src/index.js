@@ -20,6 +20,7 @@ io.on('connection', (socket) => {
     console.log('New socket connection')
     // socket.emit('message', generateMessages(greeting));
     // socket.broadcast.emit('message', generateMessages('A new user joined'))
+    
     socket.on('join', ({ username, room }, callback) => {
         const { error, user } = addUser({ id: socket.id, username, room});
 
@@ -32,18 +33,19 @@ io.on('connection', (socket) => {
     });
 
     socket.on('sendMessage', (message, callback) => {
+        const userData = getUser(socket.id);
         const filter = new Filter();
+        if (filter.isProfane(message)) return callback('Profane words not allowed!');
 
-        if (filter.isProfane(message)) return callback('Profane words not allowed!')
-
-        io.to('Barcelona').emit('message', generateMessages(message));
+        io.to(userData.room).emit('message', generateMessages(message));
         callback()
     })
 
     // listen to sendLocation event on the server
     socket.on('sendLocation', (sendLocation, callback) => {
+        const userData = getUser(socket.id);
         const locationUrl = `My location: https://google.com/maps?q=${sendLocation.latitude},${sendLocation.longitude}`
-        io.emit('locationMessage', geoLocationMessage(locationUrl));
+        io.to(userData.room).emit('locationMessage', geoLocationMessage(locationUrl));
 
         callback('Location shared!')
     })

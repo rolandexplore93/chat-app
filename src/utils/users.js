@@ -10,17 +10,6 @@ const addUser = ({ id, username, room }) => {
         return {
             error: "Username and Room must be provided"
         }
-    }
-
-    // validate id
-    const uniqueId = users.find(user => {
-        return user.id === id;
-    });
-
-    if (uniqueId){
-        return {
-            error: "User Id must be unique!"
-        }
     };
 
     // username must be unique in each room

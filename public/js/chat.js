@@ -40,7 +40,9 @@ $messageForm.addEventListener("submit", (e) => {
     $messageFormInput.value = "";
     $messageFormInput.focus();
 
-    if (serverResponse) return console.log(serverResponse);
+    console.log(serverResponse)
+
+    // if (serverResponse) return console.log(serverResponse);
   });
   
 });
@@ -72,6 +74,6 @@ $sendLocationButton.addEventListener("click", (e) => {
 socket.emit('join', { username, room }, (error) => {
   if (error){
     alert(error);
-    location.href = '/ '
+    location.href = '/'
   }
 })
