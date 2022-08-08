@@ -1,5 +1,4 @@
 // addUsers (when a user join), removeUser (when a user leaves the room), getUser, getUsersInARoom
-
 const users = [];
 
 const addUser = ({ id, username, room }) => {
@@ -53,14 +52,11 @@ const user2 = addUser({
     room: 'Ajax'
 });
 
-// console.log(user2)
-
 const user3 = addUser({
     id: 101,
     username: 'Roland',
     room: 'Bojo'
 });
-// console.log(user3);
     
 const user4 = addUser({
     id: 102,
@@ -68,19 +64,27 @@ const user4 = addUser({
     room: 'Bojo'
 });
 
-// console.log(user4);
-
 const removeUser = (id) => {
     
     // Check if user id exist in the storage
-    const index = users.findIndex(user => {
-        return user.id == id
-    })
+    const index = users.findIndex(user => user.id == id)
 
     if (index !== -1){
         return users.splice(index, 1)[0];
     }
 }
 
-// const removeAUser = removeUser(102);
-console.log(users);;
+const getUser = (id) => {
+    return users.find(user => user.id === id);
+}
+
+const getUsersInRoom = (room) => {
+    return users.filter(user => user.room === room)
+}
+
+module.exports = {
+    addUser,
+    removeUser,
+    getUser,
+    getUsersInRoom
+}
