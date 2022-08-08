@@ -25,7 +25,7 @@ io.on('connection', (socket) => {
         socket.join(room);
         socket.emit('message', generateMessages(greeting));
         socket.broadcast.to(room).emit('message', generateMessages(`${username} joined ${room} group`))
-    })
+    });
 
     socket.on('sendMessage', (message, callback) => {
         const filter = new Filter();
