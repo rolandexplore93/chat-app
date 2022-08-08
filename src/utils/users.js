@@ -53,14 +53,14 @@ const user2 = addUser({
     room: 'Ajax'
 });
 
-console.log(user2)
+// console.log(user2)
 
 const user3 = addUser({
     id: 101,
     username: 'Roland',
     room: 'Bojo'
 });
-console.log(user3);
+// console.log(user3);
     
 const user4 = addUser({
     id: 102,
@@ -68,6 +68,19 @@ const user4 = addUser({
     room: 'Bojo'
 });
 
-console.log(user4);
-console.log(users);
+// console.log(user4);
 
+const removeUser = (id) => {
+    
+    // Check if user id exist in the storage
+    const index = users.findIndex(user => {
+        return user.id == id
+    })
+
+    if (index !== -1){
+        return users.splice(index, 1)[0];
+    }
+}
+
+// const removeAUser = removeUser(102);
+console.log(users);;
