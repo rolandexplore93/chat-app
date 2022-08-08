@@ -14,10 +14,10 @@ const publicDirectoryPath = path.join(__dirname, "../public");
 const port = process.env.PORT || 3000
 app.use(express.static(publicDirectoryPath));
 
-let greeting = "Dear Anonymous! \nWelcome to our team";
+let greeting = "Hey Rookie! \nWelcome to our team";
 
 io.on('connection', (socket) => {
-    console.log('New socket connection')
+    console.log('Admin')
     // socket.emit('message', generateMessages(greeting));
     // socket.broadcast.emit('message', generateMessages('A new user joined'))
     
@@ -27,8 +27,8 @@ io.on('connection', (socket) => {
         if (error) return callback(error)
 
         socket.join(user.room);
-        socket.emit('message', generateMessages(greeting));
-        socket.broadcast.to(user.room).emit('message', generateMessages(`${user.username} joined ${user.room} group`));
+        socket.emit('message', generateMessages('Admin', greeting));
+        socket.broadcast.to(user.room).emit('message', generateMessages('Admin', `${user.username} joined ${user.room} group`));
         callback()
     });
 
@@ -37,7 +37,7 @@ io.on('connection', (socket) => {
         const filter = new Filter();
         if (filter.isProfane(message)) return callback('Profane words not allowed!');
 
-        io.to(userData.room).emit('message', generateMessages(message));
+        io.to(userData.room).emit('message', generateMessages(userData.username, message));
         callback()
     })
 
@@ -45,18 +45,16 @@ io.on('connection', (socket) => {
     socket.on('sendLocation', (sendLocation, callback) => {
         const userData = getUser(socket.id);
         const locationUrl = `My location: https://google.com/maps?q=${sendLocation.latitude},${sendLocation.longitude}`
-        io.to(userData.room).emit('locationMessage', geoLocationMessage(locationUrl));
+        io.to(userData.room).emit('locationMessage', geoLocationMessage(userData.username, locationUrl));;
 
         callback('Location shared!')
     })
 
     socket.on('disconnect', () => {
         const user = removeUser(socket.id);
-
         if (user){
-            io.to(user.room).emit('message', generateMessages(`${user.username} has left`));
+            io.to(user.room).emit('message', generateMessages('Admin', `${user.username} has left`));
         }
-
     })
 })
 
