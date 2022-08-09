@@ -31,10 +31,11 @@ label {
     color: #777;
 }
 
-input {
+input, select {
     border: 1px solid #eeeeee;
     padding: 12px;
     outline: none;
+    width: 100%;
 }
 
 button {
@@ -94,7 +95,7 @@ button:disabled {
     color: white;
     background: #333744;
     width: 225px;
-    overflow-y: scroll
+    overflow-y: scroll;
 }
 
 /* Chat styles */
@@ -180,4 +181,16 @@ button:disabled {
     list-style-type: none;
     font-weight: 300;
     padding: 12px 24px 0 24px;
+}
+
+.change-chat-room {
+    position: fixed;
+    bottom: 0;
+    width: 154px;
+    padding: 5px 0px;
+}
+
+.change-chat-room > a {
+    color: #eeeeee;
+    text-decoration: none;
 }
