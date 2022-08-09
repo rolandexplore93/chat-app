@@ -20,20 +20,19 @@ const autoscroll = () => {
   // get the height of new message
   const $newMessageStyles = parseInt(getComputedStyle($newMessage).marginBottom)
   const $newMessageHeight = $newMessage.offsetHeight + $newMessageStyles
-  console.log($newMessageStyles)
-  console.log($newMessageHeight)
+  // console.log($newMessageHeight)
 
   // Get visible height on your chat screen
   const visibleHeight = $messages.offsetHeight
-  console.log(visibleHeight)
+  // console.log(visibleHeight)
 
   // Get the container height
   const containerHeight = $messages.scrollHeight
-  console.log(containerHeight)
+  // console.log(containerHeight)
 
   // Scrolling distance by user
   const scrollDistance = $messages.scrollTop + visibleHeight
-  console.log(scrollDistance)
+  // console.log(scrollDistance)
 
   if (containerHeight - $newMessageHeight <= scrollDistance){
     $messages.scrollTop = $messages.scrollHeight
