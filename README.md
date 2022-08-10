@@ -19,3 +19,15 @@ Mingle chat app is texting app that connects to a central server (socket.io) and
 - momentjs (to format time)
 - Mustache JS
 - qs library
+
+## Author
+👤 **Orobola Roland Ogundipe**
+> I am open to us collaborating together on a project😇
+- GitHub: [@Roland](https://github.com/rolandexplore93)
+- LinkedIn: [@Roland](https://www.linkedin.com/in/roland-orobola/)
+
+## Encouragement
+Give a ⭐️ if you like this project!
+
+## 📝 License
+This project is [MIT](./MIT.md) licensed
