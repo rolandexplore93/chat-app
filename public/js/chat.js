@@ -10,7 +10,7 @@ const messageTemplate = document.querySelector("#message-template").innerHTML;
 const locationTemplate = document.querySelector('#location-template').innerHTML;
 const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML;
 
-const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true})
+const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true});
 
 // autoscroll on sending messages
 const autoscroll = () => {
@@ -47,7 +47,7 @@ socket.on("message", (message) => {
   });
   $messages.insertAdjacentHTML('beforeend', html);
   autoscroll()
-});
+});;
 
 socket.on('locationMessage', (mapUrl) => {
   console.log(mapUrl);
@@ -110,7 +110,8 @@ $sendLocationButton.addEventListener("click", (e) => {
 
 socket.emit('join', { username, room }, (error) => {
   if (error){
-    alert(error);
-    location.href = '/'
+    // alert(error);
+    location.href = '/';
+    console.log(error)
   }
 })

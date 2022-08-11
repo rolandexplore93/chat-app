@@ -11,18 +11,22 @@
   <body>
     <div class="centered-form">
       <div class="centered-form__box">
-        <h1>Join</h1>
-        <form action="/chat.html">
-          <label for="">Display name</label>
-          <input type="text" name="username" placeholder="Display name" required>
-          <select name="room" id="">
-            <option value="barcelona">Barcelona</option>
-            <option value="readMadrid">Real Madrid</option>
-            <option value="psg">PSG</option>
-            <option value="argentina">Argentina</option>
-            <option value="mancity">Man City</option>
+        <form class="centered-form__wrap" action="/chat.html">
+          <input type="text" name="username" placeholder="Display Name" required>
+          <label for="room">Choose a car:</label>
+          <select name="room" id="centered-form__room" required>
+            <!-- <option value="none" selected disabled hidden>Select chat room</option> -->
+            <optgroup label="La Liga">
+              <option value="">Barcelona</option>
+              <option value="readMadrid">Real Madrid</option>
+            </optgroup>
+            <optgroup label="EPL">
+              <option value="mancity">Man City</option>
+              <option value="liverpool">Liverpool</option>
+              <option value="chelsea">Chelsea</option>
+            </optgroup>
           </select>
-          <button>Join</button>
+          <button>Join chat room</button>
         </form>
       </div>
     </div>
