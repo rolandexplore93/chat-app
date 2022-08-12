@@ -7,6 +7,7 @@ const $messages = document.querySelector("#messages");
 
 // Templates
 const messageTemplate = document.querySelector("#message-template").innerHTML;
+const messageTemplateAdmin = document.querySelector("#message-template-admin").innerHTML;
 const locationTemplate = document.querySelector('#location-template').innerHTML;
 const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML;
 
@@ -46,6 +47,16 @@ const autoscroll = () => {
   }
 }
 
+socket.on("messageAdmin", (message) => {
+  const html = Mustache.render(messageTemplateAdmin, {
+    username: message.username,
+    message: message.text,
+    createdAt: moment(message.createdAt).format("HH:mm a")
+  });
+  $messages.insertAdjacentHTML('beforeend', html);
+  // autoscroll()
+});
+
 socket.on("message", (message) => {
   const html = Mustache.render(messageTemplate, {
     username: message.username,
@@ -53,7 +64,7 @@ socket.on("message", (message) => {
     createdAt: moment(message.createdAt).format("HH:mm a")
   });
   $messages.insertAdjacentHTML('beforeend', html);
-  autoscroll()
+  // autoscroll()
 });;
 
 socket.on('locationMessage', (mapUrl) => {
@@ -65,7 +76,7 @@ socket.on('locationMessage', (mapUrl) => {
     createdAt: moment(mapUrl.createdAt).format("HH:mm a")
   })
   $messages.insertAdjacentHTML('beforeend', html);
-  autoscroll()
+  // autoscroll()
 })
 
 socket.on('roomData', ({ room, users}) => {
