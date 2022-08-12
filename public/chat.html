@@ -18,10 +18,12 @@
         <div id="messages" class="chat__messages"></div>
 
         <div class="compose">
-          <form action="" id="submission">
+          <form id="submission">
             <input type="text" placeholder="input message" name="message" required />
-            <button>Send message</button>
-            <button id="my-location">Get my location</button>
+            <div>
+              <button class="compose__send-message">Send message</button>
+              <button id="my-location" class="compose__share-loc">Share my location</button>
+            </div>
           </form>
         </div>
       </div>
@@ -33,7 +35,7 @@
           <span class="message__name">{{username}}</span>
           <span class="message__meta">{{createdAt}}</span>
         </p>
-        <p>{{message}}</p>
+        <p class="message-info">{{message}}</p>
       </div>
     </script>
 
@@ -43,7 +45,7 @@
           <span class="message__name">{{username}}</span>
           <span class="message__meta">{{createdAt}}</span>
         </p>
-        <p>Map URL: <a href='{{url}}' target="_blank">My current location</a></p>
+        <p><a href='{{url}}' target="_blank">My current location</a></p>
       </div>
     </script>
 
