@@ -14,7 +14,7 @@ const publicDirectoryPath = path.join(__dirname, "../public");
 const port = process.env.PORT || 3000
 app.use(express.static(publicDirectoryPath));
 
-let greeting = "Hey Rookie! \nOnly discussion relevant to this group top";
+let greeting = "Hey Buddy! \nOnly discussion relevant to this group top";
 
 io.on('connection', (socket) => {
     console.log('Admin')
@@ -28,7 +28,7 @@ io.on('connection', (socket) => {
         if (error) return callback(error)
 
         socket.join(user.room);
-        socket.emit('messageAdmin', generateMessages('Admin', `Hey Rookie! Discussion must be relevant to ${user.room}`));
+        socket.emit('messageAdmin', generateMessages('Admin', `Hey Buddy! Discussion must be relevant to ${user.room} updates`));
         socket.broadcast.to(user.room).emit('message', generateMessages('Admin', `${user.username} joined ${user.room} group`));
         io.to(user.room).emit('roomData', {
             room: user.room,
