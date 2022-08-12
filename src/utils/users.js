@@ -3,9 +3,7 @@ const users = [];
 
 const addUser = ({ id, username, room }) => {
     username = username.trim().toLowerCase();
-    // if (room !== undefined){
-        room = room.trim().toLowerCase();
-    // }
+    room = room.trim().toLowerCase();
 
     // validate that input are not empty
     if (!username || !room){

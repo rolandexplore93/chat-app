@@ -12,6 +12,13 @@ const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML;
 
 const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true});
 
+// disable join chat room button if selected is none
+const disableButton = () => {
+  if (room === undefined){
+    $messageFormButton.setAttribute("disabled", "disabled");
+  }
+}
+
 // autoscroll on sending messages
 const autoscroll = () => {
   // get new message element by target the rendered message element template
@@ -110,8 +117,7 @@ $sendLocationButton.addEventListener("click", (e) => {
 
 socket.emit('join', { username, room }, (error) => {
   if (error){
-    // alert(error);
-    location.href = '/';
-    console.log(error)
+    alert(error);
+    location.href = "/";
   }
 })
