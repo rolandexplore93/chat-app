@@ -5,7 +5,8 @@ Mingle chat app is texting app that connects to a central server (socket.io) and
 > [Heroku](https://mingle-chat-app.herokuapp.com/)
 
 ### Screenshot 📷
-![image](https://user-images.githubusercontent.com/63131597/182714611-aa4e896d-9461-448d-8b4b-da5031f3a854.pn)
+![image](https://user-images.githubusercontent.com/63131597/184730895-71b249be-66d6-4fd2-a093-8a42e320640c.png)
+
 
 ### Built With
 - JavaScript
